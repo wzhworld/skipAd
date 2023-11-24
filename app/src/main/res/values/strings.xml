@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">SkipSplashAd</string>
+    <string name="btn_name">开关</string>
+    <string name="status_name">跳过广告开关状态:</string>
+    <string name="accessibility_description">用于广告跳过功能。\n若无障碍服务发生故障，可以关闭后再打开。</string>
+</resources>
