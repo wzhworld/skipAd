@@ -6,4 +6,4 @@
     android:accessibilityFeedbackType="feedbackAllMask"
     android:canRetrieveWindowContent="true"
     android:accessibilityFlags="flagReportViewIds|flagIncludeNotImportantViews|flagDefault|flagRetrieveInteractiveWindows"
-    android:notificationTimeout="1000"/>
+    android:notificationTimeout="100"/>
