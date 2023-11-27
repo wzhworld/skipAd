@@ -11,7 +11,7 @@ import com.zh1.skipsplashad.utils.LogTool
 //https://mp.weixin.qq.com/s?__biz=MzA5MzI3NjE2MA==&mid=2650278067&idx=1&sn=a738ff575526ea5c019f05a4e2aeb797&chksm=886cf9dcbf1b70ca989ca14a097a0fcfca762ca3447349acc853b155610bd8cb3001aec1200c&scene=27
 class MyAccessibilityService : AccessibilityService() {
     companion object {
-        const val MAX_COUNT: Int = Int.MAX_VALUE;
+        const val MAX_COUNT: Int = 2;
         var instance: MyAccessibilityService? = null
         val isServiceEnable: Boolean get() = instance != null   // 判断无障碍服务是否可用
     }
