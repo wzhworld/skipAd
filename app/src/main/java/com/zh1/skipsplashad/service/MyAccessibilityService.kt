@@ -11,16 +11,27 @@ import com.zh1.skipsplashad.utils.LogTool
 //https://mp.weixin.qq.com/s?__biz=MzA5MzI3NjE2MA==&mid=2650278067&idx=1&sn=a738ff575526ea5c019f05a4e2aeb797&chksm=886cf9dcbf1b70ca989ca14a097a0fcfca762ca3447349acc853b155610bd8cb3001aec1200c&scene=27
 class MyAccessibilityService : AccessibilityService() {
     companion object {
+        const val MAX_COUNT: Int = Int.MAX_VALUE;
         var instance: MyAccessibilityService? = null
         val isServiceEnable: Boolean get() = instance != null   // 判断无障碍服务是否可用
     }
 
+    private var clickCount = 0;
+
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-        event?.let {
+        event ?: return
+        if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            clickCount = 0;
+        }
+
+        event.let {
             // 如果查找包含跳过按钮的结点列表不为空
             var listOfRect = handleNode(getCurrentRootNode())
             listOfRect ?: return
             for (rect in listOfRect) {
+                if (clickCount++ > MAX_COUNT) {
+                    break
+                }
                 click(this@MyAccessibilityService, rect)
             }
         }
@@ -28,7 +39,7 @@ class MyAccessibilityService : AccessibilityService() {
 
     fun handleNode(node: AccessibilityNodeInfo?): List<Rect>? {
         val nodes = node?.findAccessibilityNodeInfosByText("跳过")
-        if (null == nodes || nodes.isEmpty()){
+        if (null == nodes || nodes.isEmpty()) {
             return null
         }
         LogTool.d("TextNodeHandler node$nodes");
